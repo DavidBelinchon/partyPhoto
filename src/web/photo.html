@@ -1,0 +1,13 @@
+<h2>photo</h2>
+
+<button ng-click="start()" class="">Start</button>
+
+<div>
+    <video id="preview"></video>
+</div>
+
+<div ng-if="startPhoto == true">
+    <webcam channel="myChannel" on-streaming="onSuccess()"></webcam>
+</div>
+
+<canvas id="snapshot" class="well pull-right"></canvas>

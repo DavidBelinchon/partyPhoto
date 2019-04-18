@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Crypto Faucet</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/angular-csp.css">
+</head>
+
+<body ng-app="InformationApp" ng-controller="informationCtrl" ng-cloak>
+
+	<div class="jumbotron text-center">
+		<h2>{{title}}</h2>
+	</div>
+    <div class="container">
+        <a href="#/create">create</a> |
+        <a href="#/photo">photo</a> |
+        <a href="#/show">show</a>
+        
+        <div ng-view></div>
+    </div>
+	 
+    
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
+	<script type="text/javascript" src="js/registerApp.js"></script>
+    <script type="text/javascript" src="libs/qrcode.min.js"></script>
+<script type="text/javascript" src="libs/angular-qr.min.js"></script>
+    
+    <script type="text/javascript" src="libs/instascan.min.js"></script>
+    <script type="text/javascript" src="libs/webcam.min.js"></script>
+    
+    <script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</body>
+
+</html>
