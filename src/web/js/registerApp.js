@@ -22,6 +22,7 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
 .controller('PhotoController', function($scope,$timeout) {
      $scope.name = 'PhotoController';
      $scope.startPhoto = false;
+     $scope.qrcontent;
      var _video;
     
       $scope.myChannel = {
@@ -37,6 +38,7 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
       scanner.addListener('scan', function (content) {
           console.log(content);
           $scope.$apply(function () {
+            $scope.qrcontent = content;
             $scope.startPhoto = true;
               $timeout(function() {
                 $scope.makeSnapshot();
@@ -82,6 +84,20 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
 
             patData = idata;
             $scope.startPhoto = false;
+            
+            var canvas = document.getElementById('snapshot');
+            var dataURL = canvas.toDataURL();
+            $.ajax({
+              type: "POST",
+              url: "/upload",
+              data: { 
+                 qrcontent : $scope.qrcontent,
+                 imgBase64: dataURL
+              }
+            }).done(function(o) {
+              console.log('saved'); 
+
+            });
         }
     };
     
