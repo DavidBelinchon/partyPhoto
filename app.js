@@ -35,7 +35,7 @@ app.post('/upload',async function (req, res, next) {
     
     var json;
     
-    if (!fs.existsSync("src/web/photos/" + qrContent.id)){
+    if (await !fs.existsSync("src/web/photos/" + qrContent.id)){
         await fs.mkdirSync("src/web/photos/" + qrContent.id);
         json = {
             name : qrContent.name,
@@ -45,22 +45,24 @@ app.post('/upload',async function (req, res, next) {
           console.log(err);
         });
     }else{
-        fs.readFile("src/web/store/" + qrContent.id +'.json', 'utf8', function readFileCallback(err, data){
-        if (err){
-            console.log(err);
-        } else {
-        obj = JSON.parse(data); 
-            console.log(obj)
-        obj.number = obj.number + 1;
-        json = obj; 
-        fs.writeFile("src/web/store/" + qrContent.id +'.json', JSON.stringify(obj), 'utf8', function(err) {
-          console.log(err);
-        }); 
-    }});
+        await fs.readFile("src/web/store/" + qrContent.id +'.json', 'utf8', async function readFileCallback(err, data){
+            if (err){
+                console.log(err);
+            } else {
+                obj = JSON.parse(data); 
+                console.log(obj)
+                obj.number = obj.number + 1;
+                json = obj; 
+                await fs.writeFile("src/web/store/" + qrContent.id +'.json', JSON.stringify(obj), 'utf8', function(err) {
+                  console.log(err);
+                }); 
+
+            }
+        });
         
     }
 
-    require("fs").writeFile("src/web/photos/" + qrContent.id + "/" + json.number +".png", base64Data, 'base64', function(err) {
+    await fs.writeFile("src/web/photos/" + qrContent.id + "/" + json.number +".png", base64Data, 'base64', function(err) {
       console.log(err);
     });
     
