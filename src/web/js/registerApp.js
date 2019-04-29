@@ -114,8 +114,22 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
     
  })
 
-.controller('ShowController', function($scope) {
+.controller('ShowController', function($scope,$interval) {
      $scope.name = 'ShowController';
+    $scope.image;
+
+    $interval(function(){
+        $.ajax({
+            type: "GET",
+            url: "/getImage"
+        }).done(function(o) {
+            console.log(o); 
+            $scope.$apply(function() {
+                $scope.image = o;
+            })
+        });
+    },5000)
+    
  })
     
 .controller('CreateController', function($scope) {

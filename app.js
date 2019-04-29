@@ -63,6 +63,31 @@ app.post('/upload',async function (req, res, next) {
     
 });
 
+app.get('/getImage', function (req, res) {
+    var userArray = require('./src/web/info/info.json');
+    
+    var randomNumber = Math.floor(Math.random() * userArray.length)
+    
+    console.log("-----------------")
+    
+    console.log("random number of user: " + randomNumber)
+    
+    var userJson = require('./src/web/store/'+ userArray[randomNumber].id +'.json');
+    
+    console.log("number of images: " + userJson.number)
+    
+    var gen = userJson.number + 1;
+    
+    var randomNumberImg = Math.floor(Math.random() * gen | 0) 
+    
+    console.log("random number of image: " + randomNumberImg)
+    
+    console.log(userArray[randomNumber].id + "/" + randomNumberImg + ".png")
+    
+    res.send("photos/" + userArray[randomNumber].id + "/" + randomNumberImg + ".png");
+    
+});
+
 
 
 app.listen(configuration.port,function () {
