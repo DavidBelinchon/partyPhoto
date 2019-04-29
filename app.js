@@ -35,36 +35,31 @@ app.post('/upload',async function (req, res, next) {
     
     var json;
     
-    if (await !fs.existsSync("src/web/photos/" + qrContent.id)){
+    if (!fs.existsSync("src/web/photos/" + qrContent.id)){
         await fs.mkdirSync("src/web/photos/" + qrContent.id);
         json = {
             name : qrContent.name,
             number: 0
         }
-        await fs.writeFile("src/web/store/" + qrContent.id +'.json', JSON.stringify(json), 'utf8', function(err) {
-          console.log(err);
-        });
+        await fs.writeFileSync("src/web/store/" + qrContent.id +'.json', JSON.stringify(json), 'utf8');
+        var info = await fs.readFileSync('src/web/info/info.json')
+        info = JSON.parse(info);
+         info.push({
+            id : qrContent.id, 
+            name : qrContent.name 
+         }) 
+        await fs.writeFileSync('src/web/info/info.json', JSON.stringify(info), 'utf8')
     }else{
-        await fs.readFile("src/web/store/" + qrContent.id +'.json', 'utf8', async function readFileCallback(err, data){
-            if (err){
-                console.log(err);
-            } else {
-                obj = JSON.parse(data); 
-                console.log(obj)
-                obj.number = obj.number + 1;
-                json = obj; 
-                await fs.writeFile("src/web/store/" + qrContent.id +'.json', JSON.stringify(obj), 'utf8', function(err) {
-                  console.log(err);
-                }); 
-
-            }
-        });
+        var data = await fs.readFileSync("src/web/store/" + qrContent.id +'.json', 'utf8');
+        var obj = JSON.parse(data); 
+        console.log(obj)
+        obj.number = obj.number + 1;
+        json = obj; 
+        await fs.writeFileSync("src/web/store/" + qrContent.id +'.json', JSON.stringify(obj), 'utf8'); 
         
     }
 
-    await fs.writeFile("src/web/photos/" + qrContent.id + "/" + json.number +".png", base64Data, 'base64', function(err) {
-      console.log(err);
-    });
+    await fs.writeFileSync("src/web/photos/" + qrContent.id + "/" + json.number +".png", base64Data, 'base64');
     
 });
 

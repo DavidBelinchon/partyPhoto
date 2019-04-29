@@ -1,3 +1,3 @@
 /node_modules
-/store/*.json
-/photos/*/*.png
+src/web/store/*.json
+src/web/photos/*/*.png
