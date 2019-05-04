@@ -2,20 +2,6 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
 .controller('informationCtrl', function($scope,$http) {
 	
     $scope.title = "tst";
-
-    $scope.claimTokens = function(){
-        $scope.bankSpinner = true;
-        $scope.claimButton = true;
-        $.post("/claimTokens", {
-            userAddr: "web3.eth.accounts[0]"
-        }, function (data, status) { 
-            $scope.$apply(function () {
-                $scope.bankSpinner = false;
-                $scope.errorShow = data;
-                $scope.getBalance();
-            })
-        });
-    }
     
     
 })

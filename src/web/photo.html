@@ -1,13 +1,15 @@
-<h2>photo</h2>
 
-<button ng-click="start()" class="">Start</button>
+<div class="wrapper">
+<button ng-click="start()" class="button btn btn-primary" ng-if="startPhoto == false">Start</button>
+</div>
 
-<div>
+
+<div class="wrapper">
     <video id="preview"></video>
 </div>
 
-<div ng-if="startPhoto == true">
+<div class="wrapper" ng-if="startPhoto == true">
     <webcam channel="myChannel" on-streaming="onSuccess()"></webcam>
 </div>
 
-<canvas id="snapshot" class="well pull-right"></canvas>
+<canvas hidden id="snapshot" class="well pull-right"></canvas>
