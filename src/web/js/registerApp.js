@@ -17,7 +17,7 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
       $scope.myChannel = {
         // the fields below are all optional
         videoHeight: 800,
-        videoWidth: 600,
+        videoWidth: 900,
         video: null // Will reference the video element on success
       };
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};

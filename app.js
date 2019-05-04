@@ -74,7 +74,8 @@ app.get('/getImage', async function (req, res) {
     
     console.log("random number of user: " + randomNumber)
     
-    var userJson = require('./src/web/store/'+ userArray[randomNumber].id +'.json');
+    var userJson = await fs.readFileSync('./src/web/store/'+ userArray[randomNumber].id +'.json');
+    userJson = JSON.parse(userJson);
     
     console.log("number of images: " + userJson.number)
     
