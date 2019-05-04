@@ -63,8 +63,10 @@ app.post('/upload',async function (req, res, next) {
     
 });
 
-app.get('/getImage', function (req, res) {
-    var userArray = require('./src/web/info/info.json');
+app.get('/getImage', async function (req, res) {
+    //var userArray = require('./src/web/info/info.json');
+    var userArray = await fs.readFileSync("./src/web/info/info.json", 'utf8');
+    userArray = JSON.parse(userArray); 
     
     var randomNumber = Math.floor(Math.random() * userArray.length)
     

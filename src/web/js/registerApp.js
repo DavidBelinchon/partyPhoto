@@ -128,7 +128,7 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
                 $scope.image = o;
             })
         });
-    },5000)
+    },10000)
     
  })
     
