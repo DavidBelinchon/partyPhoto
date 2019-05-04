@@ -9,6 +9,9 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
      $scope.name = 'PhotoController';
      $scope.startPhoto = false;
      $scope.qrcontent;
+     $scope.counter = 5;
+     $scope.counterShow = false;
+    
      var _video;
     
       $scope.myChannel = {
@@ -26,9 +29,20 @@ angular.module('InformationApp', ['ngRoute', 'ja.qr', 'webcam'])
           $scope.$apply(function () {
             $scope.qrcontent = content;
             $scope.startPhoto = true;
-              $timeout(function() {
-                $scope.makeSnapshot();
-              }, 5000);
+            $scope.counterShow = true;
+              var interval = setInterval(function() {
+                $scope.$apply(function () {
+                    $scope.counter = $scope.counter - 1;
+                    console.log($scope.counter)
+                    if ($scope.counter == 0) {
+                        // Display a login box
+                        clearInterval(interval);
+                        $scope.counter = 5;
+                        $scope.counterShow = false;
+                        $scope.makeSnapshot();
+                    }
+                })
+            }, 1000);
           })
           scanner.stop()
           
