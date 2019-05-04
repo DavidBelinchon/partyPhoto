@@ -1,3 +1,5 @@
 /node_modules
 src/web/store/*.json
+!src/web/store/0.json
 src/web/photos/*/*.png
+!src/web/photos/0/*.png
